@@ -86,7 +86,7 @@ def delete_product(id):
     try:
         product = s.query(Product).filter(Product.id == id).first()
         s.delete(product)
-        s.commit
+        s.commit()
     except Exception as e:
         print(e)
         s.rollback()

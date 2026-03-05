@@ -10,7 +10,7 @@ from flask_jwt_extended import create_access_token
 
 user_blueprint = Blueprint('user_blueprint', __name__)
 
-
+# REGISTER
 @user_blueprint.route('/register',methods=['POST'])
 def register_user():
     session = sessionmaker(connection)
@@ -34,6 +34,7 @@ def register_user():
 
     return {"message" : "Register success"}
 
+# LOGIN
 @user_blueprint.route('/login', methods=['POST'])
 def login_handle():
     session = sessionmaker(connection)
@@ -67,14 +68,14 @@ def login_handle():
         s.rollback()
         return {"message" : "gagal login"}
     
-
+# LOGOUT
 @user_blueprint.route('/logout', methods=['GET'])
 @login_required
 def user_logout():
     logout_user()
     return {"message": "success logout"}
 
-
+# LOGIN WITH JWT
 @user_blueprint.route('/loginjwt', methods=['POST'])
 def login_jwt():
     session = sessionmaker(connection)
